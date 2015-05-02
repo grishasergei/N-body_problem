@@ -13,6 +13,11 @@
 #include "NB_Universe.h"
 #include "NB_Body.h"
 #include <libiomp/omp.h>
+//#include "graphics.h"
+//#include <GLUT/glut.h>
+
+UniverseProperties uniprops;
+Body* bodies_list;
 
 double uniform_rand(double a, double b){
     return rand()/(RAND_MAX + 1.0)*(b-a) + a;
@@ -22,7 +27,7 @@ void initialize_bodies(Body* bodies, UniverseProperties universe){
     int i;
     double r;
     double theta;
-    double b = universe.L_dim / 4;
+    double b = (double) universe.L_dim / 4;
     double pi2 = 2 * M_PI;
     double r_prime;
     
@@ -30,8 +35,8 @@ void initialize_bodies(Body* bodies, UniverseProperties universe){
     for (i=0; i<universe.N; i++) {
         r = uniform_rand(0,b);
         theta = uniform_rand(0,pi2);
-        bodies[i].x = universe.L_dim/2 + r*cos(theta);
-        bodies[i].y = universe.W_dim/2 + universe.alpha * r * sin(theta);
+        bodies[i].x = (double)universe.L_dim/2 + r*cos(theta);
+        bodies[i].y = (double)universe.W_dim/2 + universe.alpha * r * sin(theta);
         r_prime = sqrt((bodies[i].x - universe.L_dim/2)*(bodies[i].x - universe.L_dim/2) +
                        (bodies[i].y - universe.W_dim/2)*(bodies[i].y - universe.W_dim/2));
         bodies[i].u = -universe.V * r_prime * sin(theta);
@@ -39,9 +44,12 @@ void initialize_bodies(Body* bodies, UniverseProperties universe){
     }
 }
 
+void display(void){
+    drawBodies(bodies_list, uniprops.N);
+}
+
 int main(int argc, const char * argv[]) {
 
-    UniverseProperties uniprops;
     
     uniprops.N = 2500;
     uniprops.delta_t = 1E-3;
@@ -50,9 +58,12 @@ int main(int argc, const char * argv[]) {
     uniprops.V = 50;
     uniprops.alpha = 0.25;
     
-    Body* bodies_list = (Body*)calloc(uniprops.N,sizeof(Body));
+    bodies_list = (Body*)calloc(uniprops.N,sizeof(Body));
     
     initialize_bodies(bodies_list, uniprops);
+    
+    graphicsInit(&argc, argv, display);
+    glutMainLoop();
     
     free(bodies_list);
     
