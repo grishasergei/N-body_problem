@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		1C5D1BCA1AF4E2FB001329B9 /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = 1C5D1BC91AF4E2FB001329B9 /* main.c */; };
+		1C5D1BD81AF4E571001329B9 /* NB_Universe.c in Sources */ = {isa = PBXBuildFile; fileRef = 1C5D1BD61AF4E571001329B9 /* NB_Universe.c */; };
+		1C5D1BDB1AF4E6F9001329B9 /* NB_Body.c in Sources */ = {isa = PBXBuildFile; fileRef = 1C5D1BD91AF4E6F9001329B9 /* NB_Body.c */; };
+		1CEFE4641AF4FAE600501CD1 /* libiomp5.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 1CEFE4631AF4FAE600501CD1 /* libiomp5.dylib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -25,6 +28,12 @@
 /* Begin PBXFileReference section */
 		1C5D1BC61AF4E2FB001329B9 /* N-body_problem */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "N-body_problem"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1C5D1BC91AF4E2FB001329B9 /* main.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
+		1C5D1BD01AF4E356001329B9 /* NB.Globals.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NB.Globals.h; sourceTree = "<group>"; };
+		1C5D1BD61AF4E571001329B9 /* NB_Universe.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = NB_Universe.c; sourceTree = "<group>"; };
+		1C5D1BD71AF4E571001329B9 /* NB_Universe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NB_Universe.h; sourceTree = "<group>"; };
+		1C5D1BD91AF4E6F9001329B9 /* NB_Body.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = NB_Body.c; sourceTree = "<group>"; };
+		1C5D1BDA1AF4E6F9001329B9 /* NB_Body.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NB_Body.h; sourceTree = "<group>"; };
+		1CEFE4631AF4FAE600501CD1 /* libiomp5.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libiomp5.dylib; path = ../../../../../../../../usr/local/Cellar/libiomp/20150227/lib/libiomp5.dylib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -32,6 +41,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1CEFE4641AF4FAE600501CD1 /* libiomp5.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -41,6 +51,7 @@
 		1C5D1BBD1AF4E2FB001329B9 = {
 			isa = PBXGroup;
 			children = (
+				1CEFE4631AF4FAE600501CD1 /* libiomp5.dylib */,
 				1C5D1BC81AF4E2FB001329B9 /* N-body_problem */,
 				1C5D1BC71AF4E2FB001329B9 /* Products */,
 			);
@@ -57,7 +68,12 @@
 		1C5D1BC81AF4E2FB001329B9 /* N-body_problem */ = {
 			isa = PBXGroup;
 			children = (
+				1C5D1BD61AF4E571001329B9 /* NB_Universe.c */,
+				1C5D1BD71AF4E571001329B9 /* NB_Universe.h */,
 				1C5D1BC91AF4E2FB001329B9 /* main.c */,
+				1C5D1BD91AF4E6F9001329B9 /* NB_Body.c */,
+				1C5D1BDA1AF4E6F9001329B9 /* NB_Body.h */,
+				1C5D1BD01AF4E356001329B9 /* NB.Globals.h */,
 			);
 			path = "N-body_problem";
 			sourceTree = "<group>";
@@ -102,6 +118,7 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
+				Base,
 			);
 			mainGroup = 1C5D1BBD1AF4E2FB001329B9;
 			productRefGroup = 1C5D1BC71AF4E2FB001329B9 /* Products */;
@@ -118,6 +135,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1C5D1BDB1AF4E6F9001329B9 /* NB_Body.c in Sources */,
+				1C5D1BD81AF4E571001329B9 /* NB_Universe.c in Sources */,
 				1C5D1BCA1AF4E2FB001329B9 /* main.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -202,6 +221,17 @@
 		1C5D1BCE1AF4E2FB001329B9 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CC = "/usr/local/bin/clang-omp";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					/usr/local/include,
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					/usr/local/Cellar/libiomp/20150227/lib,
+				);
+				OTHER_CFLAGS = "-fopenmp";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -209,6 +239,17 @@
 		1C5D1BCF1AF4E2FB001329B9 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CC = "/usr/local/bin/clang-omp";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					/usr/local/include,
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					/usr/local/Cellar/libiomp/20150227/lib,
+				);
+				OTHER_CFLAGS = "-fopenmp";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
@@ -232,6 +273,7 @@
 				1C5D1BCF1AF4E2FB001329B9 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
