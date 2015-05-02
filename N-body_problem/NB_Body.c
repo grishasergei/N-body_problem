@@ -7,3 +7,10 @@
 //
 
 #include "NB_Body.h"
+#include <math.h>
+
+double getDistance(Body a, Body b){
+    
+    return sqrt( (a.x - b.x)*(a.x - b.x) + (a.y - b.y)*(a.y - b.y) );
+    
+}

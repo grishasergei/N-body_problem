@@ -12,6 +12,7 @@
 		1C5D1BDB1AF4E6F9001329B9 /* NB_Body.c in Sources */ = {isa = PBXBuildFile; fileRef = 1C5D1BD91AF4E6F9001329B9 /* NB_Body.c */; };
 		1CEFE4641AF4FAE600501CD1 /* libiomp5.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 1CEFE4631AF4FAE600501CD1 /* libiomp5.dylib */; };
 		1CEFE5411AF501C600501CD1 /* graphics.c in Sources */ = {isa = PBXBuildFile; fileRef = 1CEFE53F1AF501C600501CD1 /* graphics.c */; };
+		1CEFE5441AF5178D00501CD1 /* NB_Calculations.c in Sources */ = {isa = PBXBuildFile; fileRef = 1CEFE5421AF5178D00501CD1 /* NB_Calculations.c */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -37,6 +38,8 @@
 		1CEFE4631AF4FAE600501CD1 /* libiomp5.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libiomp5.dylib; path = ../../../../../../../../usr/local/Cellar/libiomp/20150227/lib/libiomp5.dylib; sourceTree = "<group>"; };
 		1CEFE53F1AF501C600501CD1 /* graphics.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = graphics.c; sourceTree = "<group>"; };
 		1CEFE5401AF501C600501CD1 /* graphics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = graphics.h; sourceTree = "<group>"; };
+		1CEFE5421AF5178D00501CD1 /* NB_Calculations.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = NB_Calculations.c; sourceTree = "<group>"; };
+		1CEFE5431AF5178D00501CD1 /* NB_Calculations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NB_Calculations.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,6 +80,8 @@
 				1C5D1BC91AF4E2FB001329B9 /* main.c */,
 				1C5D1BD91AF4E6F9001329B9 /* NB_Body.c */,
 				1C5D1BDA1AF4E6F9001329B9 /* NB_Body.h */,
+				1CEFE5421AF5178D00501CD1 /* NB_Calculations.c */,
+				1CEFE5431AF5178D00501CD1 /* NB_Calculations.h */,
 				1C5D1BD01AF4E356001329B9 /* NB.Globals.h */,
 			);
 			path = "N-body_problem";
@@ -148,6 +153,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1CEFE5441AF5178D00501CD1 /* NB_Calculations.c in Sources */,
 				1CEFE5411AF501C600501CD1 /* graphics.c in Sources */,
 				1C5D1BDB1AF4E6F9001329B9 /* NB_Body.c in Sources */,
 				1C5D1BD81AF4E571001329B9 /* NB_Universe.c in Sources */,

@@ -37,7 +37,7 @@ void drawBodies(Body* bodies, int N){
     
     // Scale and translate the scene so coordinates match those in X.
     glPushMatrix();
-    glScalef(2.0,2.0,1.0);
+    glScalef(1.0,1.0,1.0);
     glTranslatef(-0.5,-0.5,0);
     
     // Begin drawing

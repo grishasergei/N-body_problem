@@ -8,13 +8,15 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include "NB.Globals.h"
 #include <math.h>
+#include <libiomp/omp.h>
+
+#include "NB.Globals.h"
 #include "NB_Universe.h"
 #include "NB_Body.h"
-#include <libiomp/omp.h>
-//#include "graphics.h"
-//#include <GLUT/glut.h>
+#include "NB_Calculations.h"
+
+#include "graphics.h"
 
 UniverseProperties uniprops;
 Body* bodies_list;
@@ -31,12 +33,16 @@ void initialize_bodies(Body* bodies, UniverseProperties universe){
     double pi2 = 2 * M_PI;
     double r_prime;
     
-    #pragma omp parallel for private(r, theta, r_prime)
+    //#pragma omp parallel for private(r, theta, r_prime)
     for (i=0; i<universe.N; i++) {
         r = uniform_rand(0,b);
         theta = uniform_rand(0,pi2);
         bodies[i].x = (double)universe.L_dim/2 + r*cos(theta);
         bodies[i].y = (double)universe.W_dim/2 + universe.alpha * r * sin(theta);
+        if ((bodies[i].x >=1) || (bodies[i].y >= 1)) {
+            printf("X = %f Y = %f \n",bodies[i].x, bodies[i].y);
+        }
+        
         r_prime = sqrt((bodies[i].x - universe.L_dim/2)*(bodies[i].x - universe.L_dim/2) +
                        (bodies[i].y - universe.W_dim/2)*(bodies[i].y - universe.W_dim/2));
         bodies[i].u = -universe.V * r_prime * sin(theta);
@@ -46,6 +52,7 @@ void initialize_bodies(Body* bodies, UniverseProperties universe){
 
 void display(void){
     drawBodies(bodies_list, uniprops.N);
+    calculate_velocity(bodies_list, uniprops);
 }
 
 int main(int argc, const char * argv[]) {
@@ -57,6 +64,7 @@ int main(int argc, const char * argv[]) {
     uniprops.W_dim = 1;
     uniprops.V = 50;
     uniprops.alpha = 0.25;
+    uniprops.gravity = (double) 100 / uniprops.N;
     
     bodies_list = (Body*)calloc(uniprops.N,sizeof(Body));
     

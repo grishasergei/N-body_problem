@@ -11,14 +11,15 @@
 
 #include <stdio.h>
 
-#endif /* defined(__N_body_problem__NB_Universe__) */
-
 typedef struct{
     int N;
-    double gravitation;
+    double gravity;
     int L_dim;
     int W_dim;
     int V;
     double delta_t;
     double alpha;
 } UniverseProperties;
+
+#endif /* defined(__N_body_problem__NB_Universe__) */
+

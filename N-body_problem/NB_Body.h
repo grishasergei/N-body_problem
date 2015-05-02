@@ -11,12 +11,16 @@
 
 #include <stdio.h>
 
-#endif /* defined(__N_body_problem__NB_Body__) */
-
 typedef struct{
     double x;
     double y;
-    double F;
+    double Fx;
+    double Fy;
     double u;
     double v;
 }Body;
+
+double getDistance(Body a, Body b);
+
+#endif /* defined(__N_body_problem__NB_Body__) */
+
