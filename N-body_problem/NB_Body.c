@@ -7,10 +7,32 @@
 //
 
 #include "NB_Body.h"
+#include "NB.Globals.h"
 #include <math.h>
 
 double getDistance(Body a, Body b){
-    
     return sqrt( (a.x - b.x)*(a.x - b.x) + (a.y - b.y)*(a.y - b.y) );
-    
+}
+
+bool body_inQuad(Body body, Quad quad){
+    return quad_contains(quad, body.x, body.y);
+}
+
+void Body_addAtoB(Body a, Body *b){
+    double m = a.mass + b->mass;
+    b->x = (a.x*a.mass + b->x*b->mass) / m;
+    b->y = (a.y*a.mass + b->y*b->mass) / m;
+}
+
+void body_addForce(Body* a, Body b, UniverseProperties uniprops){
+    if (a->ID==b.ID) {
+        //cannot apply force on myself
+        return;
+    }
+    double dist = getDistance(*a, b);
+    double dx = b.x - a->x;
+    double dy = b.y - a->y;
+    double F = -uniprops.gravity * a->mass * b.mass / ((dist * NB_EPSILON)*(dist * NB_EPSILON));
+    a->Fx = F * dx / (dist + NB_EPSILON);
+    a->Fy = F * dy / (dist + NB_EPSILON);
 }

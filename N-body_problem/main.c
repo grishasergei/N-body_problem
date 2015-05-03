@@ -15,6 +15,8 @@
 #include "NB_Universe.h"
 #include "NB_Body.h"
 #include "NB_Calculations.h"
+#include "BHTree.h"
+#include "Quad.h"
 
 #include "graphics.h"
 
@@ -48,17 +50,30 @@ void initialize_bodies(Body* bodies, UniverseProperties universe){
                        (bodies[i].y - universe.W_dim/2)*(bodies[i].y - universe.W_dim/2));
         bodies[i].u = -universe.V * r_prime * sin(theta);
         bodies[i].v = universe.V * r_prime * cos(theta);
+        bodies[i].ID = i;
+        bodies[i].mass = 1;
     }
 }
 
 void display(void){
-    T += uniprops.delta_t;
-    printf("T: %f\n",T);
+    int i;
+    Quad quad;
+    quad.length = 1;
+    quad.xmid = 0.5;
+    quad.ymid = 0.5;
+
     drawBodies(bodies_list, uniprops.N);
-    //if (T < 0.02) {
-        calculate_velocity(bodies_list, uniprops);
-    //}
     
+    BHTree* tree = BHTree_create(quad);
+    for (i=0; i<uniprops.N; i++) {
+        BHTree_insertBody(tree, bodies_list[i]);
+        printf("ID: %d inserted \n",bodies_list[i].ID);
+    }
+    for (i=0; i<uniprops.N; i++) {
+        BHTree_updateForce(*tree, &bodies_list[i], uniprops);
+    }
+    update_positions(bodies_list, uniprops);
+    //calculate_velocity(bodies_list, uniprops);
 }
 
 int main(int argc, const char * argv[]) {

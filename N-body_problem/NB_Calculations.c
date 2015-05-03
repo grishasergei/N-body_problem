@@ -51,5 +51,20 @@ void calculate_velocity(Body* bodies, UniverseProperties uniprop){
         }
          */
     }
+}
+
+void update_positions(Body *bodies, UniverseProperties uniprop){
+    int i;
+    double ax, ay;
     
+    for (i=0; i<uniprop.N; i++) {
+        ax = bodies[i].Fx / MASS;
+        ay = bodies[i].Fy / MASS;
+        
+        bodies[i].u += uniprop.delta_t * ax;
+        bodies[i].v += uniprop.delta_t * ay;
+        
+        bodies[i].x += uniprop.delta_t * bodies[i].u;
+        bodies[i].y += uniprop.delta_t * bodies[i].v;
+    }
 }

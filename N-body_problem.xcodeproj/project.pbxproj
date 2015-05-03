@@ -13,6 +13,8 @@
 		1CEFE4641AF4FAE600501CD1 /* libiomp5.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 1CEFE4631AF4FAE600501CD1 /* libiomp5.dylib */; };
 		1CEFE5411AF501C600501CD1 /* graphics.c in Sources */ = {isa = PBXBuildFile; fileRef = 1CEFE53F1AF501C600501CD1 /* graphics.c */; };
 		1CEFE5441AF5178D00501CD1 /* NB_Calculations.c in Sources */ = {isa = PBXBuildFile; fileRef = 1CEFE5421AF5178D00501CD1 /* NB_Calculations.c */; };
+		1CEFE54B1AF6736200501CD1 /* Quad.c in Sources */ = {isa = PBXBuildFile; fileRef = 1CEFE5491AF6736200501CD1 /* Quad.c */; };
+		1CEFE54E1AF6772D00501CD1 /* BHTree.c in Sources */ = {isa = PBXBuildFile; fileRef = 1CEFE54C1AF6772D00501CD1 /* BHTree.c */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -40,6 +42,10 @@
 		1CEFE5401AF501C600501CD1 /* graphics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = graphics.h; sourceTree = "<group>"; };
 		1CEFE5421AF5178D00501CD1 /* NB_Calculations.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = NB_Calculations.c; sourceTree = "<group>"; };
 		1CEFE5431AF5178D00501CD1 /* NB_Calculations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NB_Calculations.h; sourceTree = "<group>"; };
+		1CEFE5491AF6736200501CD1 /* Quad.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Quad.c; sourceTree = "<group>"; };
+		1CEFE54A1AF6736200501CD1 /* Quad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Quad.h; sourceTree = "<group>"; };
+		1CEFE54C1AF6772D00501CD1 /* BHTree.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = BHTree.c; sourceTree = "<group>"; };
+		1CEFE54D1AF6772D00501CD1 /* BHTree.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BHTree.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,6 +63,7 @@
 		1C5D1BBD1AF4E2FB001329B9 = {
 			isa = PBXGroup;
 			children = (
+				1CEFE5481AF6734A00501CD1 /* Quad_Tree */,
 				1CEFE4651AF4FDC800501CD1 /* Graphics */,
 				1CEFE4631AF4FAE600501CD1 /* libiomp5.dylib */,
 				1C5D1BC81AF4E2FB001329B9 /* N-body_problem */,
@@ -94,6 +101,17 @@
 				1CEFE5401AF501C600501CD1 /* graphics.h */,
 			);
 			name = Graphics;
+			sourceTree = "<group>";
+		};
+		1CEFE5481AF6734A00501CD1 /* Quad_Tree */ = {
+			isa = PBXGroup;
+			children = (
+				1CEFE5491AF6736200501CD1 /* Quad.c */,
+				1CEFE54A1AF6736200501CD1 /* Quad.h */,
+				1CEFE54C1AF6772D00501CD1 /* BHTree.c */,
+				1CEFE54D1AF6772D00501CD1 /* BHTree.h */,
+			);
+			name = Quad_Tree;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -153,10 +171,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1CEFE54E1AF6772D00501CD1 /* BHTree.c in Sources */,
 				1CEFE5441AF5178D00501CD1 /* NB_Calculations.c in Sources */,
 				1CEFE5411AF501C600501CD1 /* graphics.c in Sources */,
 				1C5D1BDB1AF4E6F9001329B9 /* NB_Body.c in Sources */,
 				1C5D1BD81AF4E571001329B9 /* NB_Universe.c in Sources */,
+				1CEFE54B1AF6736200501CD1 /* Quad.c in Sources */,
 				1C5D1BCA1AF4E2FB001329B9 /* main.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

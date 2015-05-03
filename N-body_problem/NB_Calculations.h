@@ -15,7 +15,7 @@
 #include "NB.Globals.h"
 
 void calculate_velocity(Body* bodies, UniverseProperties uniprop);
-
+void update_positions(Body *bodies, UniverseProperties uniprop);
 
 
 #endif /* defined(__N_body_problem__NB_Calculations__) */
