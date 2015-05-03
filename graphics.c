@@ -60,7 +60,7 @@ void graphicsInit(int* argc, char** argv, void* display)
     glutInitDisplayMode(GLUT_RGBA | GLUT_DOUBLE | GLUT_DEPTH);
     glutInitWindowSize(800, 800);
     
-    glutCreateWindow("Bounce");
+    glutCreateWindow("Galaxy");
     
     glutDisplayFunc(display);
     glutReshapeFunc(reshape);

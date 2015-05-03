@@ -13,7 +13,7 @@ static const int    MASS = 1;
 //static const double GRAVITATIONAL_CONSTANT = 6.673E-11;
 static const int    L_DIM = 1;
 static const int    W_DIM = 1;
-static const double NB_EPSILON = 1E-4;
+static const double NB_EPSILON = 1E-2;
 
 #endif
 

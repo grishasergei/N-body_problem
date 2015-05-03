@@ -13,6 +13,7 @@ void calculate_forces(Body* bodies, UniverseProperties uniprop){
     int i,j;
     double r;
     
+    #pragma omp parallel for private(j,r)
     for (i=0; i<uniprop.N; i++) {
         bodies[i].Fx = 0;
         bodies[i].Fy = 0;
@@ -44,6 +45,11 @@ void calculate_velocity(Body* bodies, UniverseProperties uniprop){
         
         bodies[i].x += uniprop.delta_t * bodies[i].u;
         bodies[i].y += uniprop.delta_t * bodies[i].v;
+        /*
+        if ((bodies[i].x >= 1) || (bodies[i].y >= 1)) {
+            printf("X = %f Y = %f \n",bodies[i].x, bodies[i].y);
+        }
+         */
     }
     
 }

@@ -12,11 +12,11 @@
 #include <stdio.h>
 
 typedef struct{
-    int N;
+    double N;
     double gravity;
-    int L_dim;
-    int W_dim;
-    int V;
+    double L_dim;
+    double W_dim;
+    double V;
     double delta_t;
     double alpha;
 } UniverseProperties;
