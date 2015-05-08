@@ -271,7 +271,10 @@
 					"$(inherited)",
 					/usr/local/Cellar/libiomp/20150227/lib,
 				);
-				OTHER_CFLAGS = "-fopenmp";
+				OTHER_CFLAGS = (
+					"-fopenmp",
+					"-g",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -289,7 +292,10 @@
 					"$(inherited)",
 					/usr/local/Cellar/libiomp/20150227/lib,
 				);
-				OTHER_CFLAGS = "-fopenmp";
+				OTHER_CFLAGS = (
+					"-fopenmp",
+					"-g",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;

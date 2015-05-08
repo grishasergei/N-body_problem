@@ -14,7 +14,7 @@
 
 typedef struct{
     double xmid, ymid;
-    double length;
+    long double length;
 } Quad;
 
 bool quad_contains(Quad quad, double x, double y);

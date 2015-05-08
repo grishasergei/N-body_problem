@@ -10,6 +10,7 @@
 #include <stdlib.h>
 #include <math.h>
 #include <libiomp/omp.h>
+#include "time.h"
 
 #include "NB.Globals.h"
 #include "NB_Universe.h"
@@ -36,7 +37,7 @@ void initialize_bodies(Body* bodies, UniverseProperties universe){
     double pi2 = 2 * M_PI;
     double r_prime;
     
-    #pragma omp parallel for private(r, theta, r_prime)
+    //#pragma omp parallel for private(r, theta, r_prime)
     for (i=0; i<universe.N; i++) {
         r = uniform_rand(0,b);
         theta = uniform_rand(0,pi2);
@@ -56,31 +57,47 @@ void initialize_bodies(Body* bodies, UniverseProperties universe){
 }
 
 void display(void){
+    
     int i;
     Quad quad;
     quad.length = 1;
     quad.xmid = 0.5;
     quad.ymid = 0.5;
-
+    
+    
     drawBodies(bodies_list, uniprops.N);
     
+    clock_t t1 = clock();
+    
     BHTree* tree = BHTree_create(quad);
+    
     for (i=0; i<uniprops.N; i++) {
-        BHTree_insertBody(tree, bodies_list[i]);
-        printf("ID: %d inserted \n",bodies_list[i].ID);
+        //printf("ID: %d inserting \n",bodies_list[i].ID);
+        BHTree_insertBody(tree, &bodies_list[i]);
     }
+    
     for (i=0; i<uniprops.N; i++) {
-        BHTree_updateForce(*tree, &bodies_list[i], uniprops);
+        bodies_list[i].Fx = 0;
+        bodies_list[i].Fy = 0;
+        BHTree_updateForce(tree, &bodies_list[i], uniprops);
     }
-    update_positions(bodies_list, uniprops);
+    
+    BHTree_destroy(tree);
+    
     //calculate_velocity(bodies_list, uniprops);
+    clock_t t2 = clock();
+    printf("The time taken is.. %f\n",(double)(t2-t1)/CLOCKS_PER_SEC);
+    
+    update_positions(bodies_list, uniprops);
+    
 }
 
 int main(int argc, const char * argv[]) {
+    int i;
     
     T = 0;
     
-    uniprops.N = 5000;
+    uniprops.N = 10000;
     uniprops.delta_t = 1E-3;
     uniprops.L_dim = 1;
     uniprops.W_dim = 1;
@@ -94,11 +111,14 @@ int main(int argc, const char * argv[]) {
     
     graphicsInit(&argc, argv, display);
     glutMainLoop();
-    
+    /*
+    for (i=0; i<1000000; i++) {
+        //printf("%d/n",i);
+        display();
+    }
+    */
     free(bodies_list);
     
-    
-    printf("Hello, World!\n");
     return 0;
 }
 

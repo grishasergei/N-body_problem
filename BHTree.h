@@ -15,7 +15,7 @@
 #include "NB_Body.h"
 
 struct BHTree{
-    Body body;
+    Body* body;
     Quad quad;
     struct BHTree *NW;
     struct BHTree *NE;
@@ -28,8 +28,8 @@ typedef struct BHTree BHTree;
 BHTree*  BHTree_create(Quad quad);
 void    BHTree_destroy(BHTree* tree);
 bool    BHTree_isExternal(BHTree* tree);
-void    BHTree_insertBody(BHTree* tree, Body body);
-void    BHTree_updateForce(BHTree tree, Body* body, UniverseProperties uniprops);
+void    BHTree_insertBody(BHTree* tree, Body* body);
+void    BHTree_updateForce(BHTree* tree, Body* body, UniverseProperties uniprops);
 
 
 #endif /* defined(__N_body_problem__BHTree__) */
