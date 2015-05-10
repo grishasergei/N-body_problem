@@ -25,24 +25,12 @@ void Body_addAtoB(Body a, Body *b){
     b->mass = m;
 }
 
-void body_addForce(Body* a, Body b, UniverseProperties uniprops){
-    /*
-    if (a->ID==b.ID) {
-        //cannot apply force on myself
-        return;
-    }
-     */
-    /*
-    double dist = getDistance(*a, b);
-    if (dist==0) {
-        return;
-    }
-     */
-    double dx = b.x - a->x;
-    double dy = b.y - a->y;
+void body_addForce(Body* a, Body *b, UniverseProperties uniprops){
+    double dx = b->x - a->x;
+    double dy = b->y - a->y;
     double dist = sqrt(dx*dx +dy*dy);
 
-    double F = uniprops.gravity * a->mass * b.mass / ((dist + NB_EPSILON)*(dist + NB_EPSILON));
+    double F = uniprops.gravity * a->mass * b->mass / ((dist + NB_EPSILON)*(dist + NB_EPSILON));
     a->Fx += F * dx / (dist + NB_EPSILON);
     a->Fy += F * dy / (dist + NB_EPSILON);
 }

@@ -146,10 +146,10 @@ void BHTree_insertBody(BHTree* tree, Body* body){
 void    BHTree_updateForce(BHTree* tree, Body* body, UniverseProperties uniprops){
     if (BHTree_isExternal(tree)==true) {
         if (Body_areEqual(body, tree->body)==false) {
-            body_addForce(body, *tree->body, uniprops);
+            body_addForce(body, tree->body, uniprops);
         }
     } else if (tree->quad.length / getDistance(*body, *tree->body) < THRESHOLD_THETA){
-        body_addForce(body, *tree->body, uniprops);
+        body_addForce(body, tree->body, uniprops);
     } else {
         if (tree->NW != NULL) {
             BHTree_updateForce(tree->NW, body,uniprops);

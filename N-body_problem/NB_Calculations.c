@@ -14,7 +14,7 @@ void calculate_forces(Body* bodies, UniverseProperties uniprop){
     int i,j;
     double r;
     
-    #pragma omp parallel for private(j,r)
+    #pragma omp for private(j,r)
     for (i=0; i<uniprop.N; i++) {
         bodies[i].Fx = 0;
         bodies[i].Fy = 0;
@@ -77,7 +77,7 @@ void initialize_bodies(Body* bodies, UniverseProperties universe){
     double pi2 = 2 * M_PI;
     double r_prime;
     
-    //#pragma omp parallel for private(r, theta, r_prime)
+    #pragma omp for private(r, theta, r_prime)
     for (i=0; i<universe.N; i++) {
         r = uniform_rand(0,b);
         theta = uniform_rand(0,pi2);
@@ -95,7 +95,6 @@ void initialize_bodies(Body* bodies, UniverseProperties universe){
         bodies[i].mass = 1;
     }
     
-    //#pragma omp barrier
     
 }
 

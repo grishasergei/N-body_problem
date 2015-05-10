@@ -74,11 +74,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "N-body_problem/NB_Body.c"
-            timestampString = "452774983.358935"
+            timestampString = "452946543.892827"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "41"
-            endingLineNumber = "41"
+            startingLineNumber = "29"
+            endingLineNumber = "29"
             landmarkName = "body_addForce()"
             landmarkType = "7">
          </BreakpointContent>
@@ -298,22 +298,6 @@
             startingLineNumber = "27"
             endingLineNumber = "27"
             landmarkName = "BHTree_destroy()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "N-body_problem/NB_Body.c"
-            timestampString = "452773913.262773"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "32"
-            endingLineNumber = "32"
-            landmarkName = "body_addForce()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
