@@ -16,6 +16,6 @@
 
 void calculate_velocity(Body* bodies, UniverseProperties uniprop);
 void update_positions(Body *bodies, UniverseProperties uniprop);
-
+void initialize_bodies(Body* bodies, UniverseProperties universe);
 
 #endif /* defined(__N_body_problem__NB_Calculations__) */
