@@ -9,7 +9,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "time.h"
-
+#include <libiomp/omp.h>
 #include "NB.Globals.h"
 #include "NB_Universe.h"
 #include "NB_Body.h"
@@ -22,41 +22,69 @@
 UniverseProperties uniprops;
 Body* bodies_list;
 double T;
+int count;
+int N_ITERATIONS = 200;
+double time_to_create_bh_tree, time_to_calc_forces, time_to_update_positions;
 
 void display(void){
-    
+    clock_t t1, t2;
     int i;
     Quad quad;
     quad.length = 1;
     quad.xmid = 0.5;
     quad.ymid = 0.5;
     
+    printf("Iteration: %d\n", count);
+    count++;
     
     drawBodies(bodies_list, uniprops.N);
     
-    clock_t t1 = clock();
-    
+    /*
+     Create BH tree
+     */
+    t1 = clock();
     BHTree* tree = BHTree_create(quad);
-    
     for (i=0; i<uniprops.N; i++) {
-        //printf("ID: %d inserting \n",bodies_list[i].ID);
         BHTree_insertBody(tree, &bodies_list[i]);
     }
-    
+    t2 = clock();
+    time_to_create_bh_tree += (double)(t2-t1)/CLOCKS_PER_SEC;
+    //printf("The time taken is.. %f\n",(double)(t2-t1)/CLOCKS_PER_SEC);
+
+    /*
+     Calculate forces
+     */
+    t1 = clock();
+    //#pragma omp for
     for (i=0; i<uniprops.N; i++) {
         bodies_list[i].Fx = 0;
         bodies_list[i].Fy = 0;
         BHTree_updateForce(tree, &bodies_list[i], uniprops);
     }
+    t2 = clock();
+    time_to_calc_forces += (double)(t2-t1)/CLOCKS_PER_SEC;
     
     BHTree_destroy(tree);
     
-    //calculate_velocity(bodies_list, uniprops);
-    clock_t t2 = clock();
-    printf("The time taken is.. %f\n",(double)(t2-t1)/CLOCKS_PER_SEC);
-    
+    /*
+     Update positions
+     */
+    t1 = clock();
     update_positions(bodies_list, uniprops);
-    
+    t2 = clock();
+    time_to_update_positions += (double)(t2-t1)/CLOCKS_PER_SEC;
+
+    if (count>N_ITERATIONS-1) {
+        time_to_calc_forces /= N_ITERATIONS;
+        time_to_create_bh_tree /= N_ITERATIONS;
+        time_to_update_positions /= N_ITERATIONS;
+        printf("Average time:\n");
+        printf("Create BH tree: %f\n", time_to_create_bh_tree);
+        printf("Calculate forces: %f\n", time_to_calc_forces);
+        printf("Update positions: %f\n", time_to_update_positions);
+        exit(0);
+    }
+
 }
 
 double calcall(void){
@@ -102,6 +130,11 @@ int main(int argc, const char * argv[]) {
     uniprops.V = 50;
     uniprops.alpha = 0.25;
     uniprops.gravity = 100 / uniprops.N;
+    
+    count = 0;
+    time_to_calc_forces = 0;
+    time_to_create_bh_tree = 0;
+    time_to_update_positions = 0;
     
     bodies_list = (Body*)calloc(uniprops.N,sizeof(Body));
     
