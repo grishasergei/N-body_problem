@@ -8,7 +8,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include "time.h"
+#include <sys/time.h>
 #include <libiomp/omp.h>
 #include "NB.Globals.h"
 #include "NB_Universe.h"
@@ -27,7 +27,7 @@ int N_ITERATIONS = 200;
 double time_to_create_bh_tree, time_to_calc_forces, time_to_update_positions;
 
 void display(void){
-    clock_t t1, t2;
+    struct timeval t1, t2;
     int i;
     Quad quad;
     quad.length = 1;
@@ -42,37 +42,37 @@ void display(void){
     /*
      Create BH tree
      */
-    t1 = clock();
+    gettimeofday(&t1,NULL);
     BHTree* tree = BHTree_create(quad);
     for (i=0; i<uniprops.N; i++) {
         BHTree_insertBody(tree, &bodies_list[i]);
     }
-    t2 = clock();
-    time_to_create_bh_tree += (double)(t2-t1)/CLOCKS_PER_SEC;
+    gettimeofday(&t2,NULL);
+    time_to_create_bh_tree += t2.tv_sec - t1.tv_sec + (double)(t2.tv_usec - t1.tv_usec)/1000000;
     //printf("The time taken is.. %f\n",(double)(t2-t1)/CLOCKS_PER_SEC);
 
     /*
      Calculate forces
      */
-    t1 = clock();
+    gettimeofday(&t1,NULL);
     //#pragma omp for
     for (i=0; i<uniprops.N; i++) {
         bodies_list[i].Fx = 0;
         bodies_list[i].Fy = 0;
         BHTree_updateForce(tree, &bodies_list[i], uniprops);
     }
-    t2 = clock();
-    time_to_calc_forces += (double)(t2-t1)/CLOCKS_PER_SEC;
+    gettimeofday(&t2,NULL);
+    time_to_calc_forces += t2.tv_sec - t1.tv_sec + (double)(t2.tv_usec - t1.tv_usec)/1000000;
     
     BHTree_destroy(tree);
     
     /*
      Update positions
      */
-    t1 = clock();
+    gettimeofday(&t1,NULL);
     update_positions(bodies_list, uniprops);
-    t2 = clock();
-    time_to_update_positions += (double)(t2-t1)/CLOCKS_PER_SEC;
+    gettimeofday(&t2,NULL);
+    time_to_update_positions += t2.tv_sec - t1.tv_sec + (double)(t2.tv_usec - t1.tv_usec)/1000000;
 
     if (count>N_ITERATIONS-1) {
         time_to_calc_forces /= N_ITERATIONS;
