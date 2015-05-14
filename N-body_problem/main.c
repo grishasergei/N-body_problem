@@ -24,6 +24,7 @@ double T;
 int count;
 int N_ITERATIONS = 1000;
 double time_to_create_bh_tree, time_to_calc_forces, time_to_update_positions;
+double avg_time_to_create_bh_tree, avg_time_to_calc_forces, avg_time_to_update_positions;
 
 void display(void){
     struct timeval t1, t2;
@@ -33,7 +34,7 @@ void display(void){
     quad.xmid = 0.5;
     quad.ymid = 0.5;
     
-    printf("Iteration: %d\n", count);
+    //printf("Iteration: %d\n", count);
     count++;
     
     drawBodies(bodies_list, uniprops.N);
@@ -42,7 +43,12 @@ void display(void){
      Create BH tree
      */
     gettimeofday(&t1,NULL);
-    BHTree* tree = BHTree_create(quad);
+
+    Pool_init(&pool, 10000);
+    
+    BHTree* tree = Pool_getNextTree(&pool, quad);
+    
+    
     for (i=0; i<uniprops.N; i++) {
         BHTree_insertBody(tree, &bodies_list[i]);
     }
@@ -63,7 +69,10 @@ void display(void){
     gettimeofday(&t2,NULL);
     time_to_calc_forces += t2.tv_sec - t1.tv_sec + (double)(t2.tv_usec - t1.tv_usec)/1000000;
     
-    BHTree_destroy(tree);
+    //BHTree_destroy(tree);
+    
+    free(pool.bodies);
+    free(pool.trees);
     
     /*
      Update positions
@@ -73,17 +82,21 @@ void display(void){
     gettimeofday(&t2,NULL);
     time_to_update_positions += t2.tv_sec - t1.tv_sec + (double)(t2.tv_usec - t1.tv_usec)/1000000;
 
-    if (count>N_ITERATIONS-1) {
-        time_to_calc_forces /= N_ITERATIONS;
-        time_to_create_bh_tree /= N_ITERATIONS;
-        time_to_update_positions /= N_ITERATIONS;
+    //if (count>N_ITERATIONS-1) {
+    /*
+        avg_time_to_calc_forces = time_to_calc_forces / count;
+        avg_time_to_create_bh_tree = time_to_create_bh_tree / count;
+        avg_time_to_update_positions = time_to_update_positions / count;
         printf("Average time:\n");
-        printf("Create BH tree: %f\n", time_to_create_bh_tree);
-        printf("Calculate forces: %f\n", time_to_calc_forces);
-        printf("Update positions: %f\n", time_to_update_positions);
+        printf("Create BH tree: %f\n", avg_time_to_create_bh_tree);
+        printf("Calculate forces: %f\n", avg_time_to_calc_forces);
+        printf("Update positions: %f\n", avg_time_to_update_positions);
+     */
+        //exit(0);
+    //}
+    if (count>N_ITERATIONS-1) {
         exit(0);
     }
-
 }
 
 int main(int argc, const char * argv[]) {

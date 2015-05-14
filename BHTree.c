@@ -1,3 +1,4 @@
+
 //
 //  BHTree.c
 //  N-body_problem
@@ -10,15 +11,6 @@
 #include <string.h>
 #include "NB.Globals.h"
 #include "BHTree.h"
-
-BHTree*  BHTree_create(Quad quad){
-    BHTree* tree;
-    tree = (BHTree*)calloc(1, sizeof(BHTree));
-    tree->quad = quad;
-    tree->body = (Body*)calloc(1,sizeof(Body));
-    tree->body->ID = -1;
-    return tree;
-}
 
 void BHTree_destroy(BHTree* tree){
     if (tree == NULL) {
@@ -36,15 +28,12 @@ void BHTree_destroy(BHTree* tree){
     if (tree->SE != NULL) {
         BHTree_destroy(tree->SE);
     }
-    
-    //if (BHTree_isExternal(tree)) {
-        if (tree->body != NULL) {
-            free(tree->body);
-            tree->body = NULL;
-        }
-        free(tree);
-        tree = NULL;
-    //}
+    if (tree->body != NULL) {
+        free(tree->body);
+        tree->body = NULL;
+    }
+    free(tree);
+    tree = NULL;
 }
 
 bool BHTree_isExternal(BHTree* tree){
@@ -67,7 +56,7 @@ void BHTree_insertBody(BHTree* tree, Body* body){
         q = quad_subdivide_NW(tree->quad);
         if (body_inQuad(*body, q)==true) {
             if (tree->NW==NULL) {
-                tree->NW = BHTree_create(q);
+                tree->NW = Pool_getNextTree(&pool, q);
             }
             BHTree_insertBody(tree->NW, body);
         } else {
@@ -75,7 +64,7 @@ void BHTree_insertBody(BHTree* tree, Body* body){
             q = quad_subdivide_NE(tree->quad);
             if (body_inQuad(*body, q)==true) {
                 if (tree->NE==NULL) {
-                    tree->NE = BHTree_create(q);
+                    tree->NE = Pool_getNextTree(&pool, q);
                 }
                 BHTree_insertBody(tree->NE, body);
             } else {
@@ -83,7 +72,7 @@ void BHTree_insertBody(BHTree* tree, Body* body){
                 q = quad_subdivide_SW(tree->quad);
                 if (body_inQuad(*body, q)==true) {
                     if (tree->SW==NULL) {
-                        tree->SW = BHTree_create(q);
+                        tree->SW = Pool_getNextTree(&pool, q);
                     }
                     BHTree_insertBody(tree->SW, body);
                 } else {
@@ -91,7 +80,7 @@ void BHTree_insertBody(BHTree* tree, Body* body){
                     q = quad_subdivide_SE(tree->quad);
                     if (body_inQuad(*body, q)==true) {
                         if (tree->SE==NULL) {
-                            tree->SE = BHTree_create(q);
+                            tree->SE = Pool_getNextTree(&pool, q);
                         }
                         BHTree_insertBody(tree->SE, body);
                     }
@@ -105,7 +94,7 @@ void BHTree_insertBody(BHTree* tree, Body* body){
         q = quad_subdivide_NW(tree->quad);
         if (body_inQuad(*b, q)==true) {
             if (tree->NW==NULL) {
-                tree->NW = BHTree_create(q);
+                tree->NW = Pool_getNextTree(&pool, q);
             }
             BHTree_insertBody(tree->NW, b);
         } else {
@@ -113,7 +102,7 @@ void BHTree_insertBody(BHTree* tree, Body* body){
             q = quad_subdivide_NE(tree->quad);
             if (body_inQuad(*b, q)==true) {
                 if (tree->NE==NULL) {
-                    tree->NE = BHTree_create(q);
+                    tree->NE = Pool_getNextTree(&pool, q);
                 }
                 BHTree_insertBody(tree->NE, b);
             } else {
@@ -121,7 +110,7 @@ void BHTree_insertBody(BHTree* tree, Body* body){
                 q = quad_subdivide_SW(tree->quad);
                 if (body_inQuad(*b, q)==true) {
                     if (tree->SW==NULL) {
-                        tree->SW = BHTree_create(q);
+                        tree->SW = Pool_getNextTree(&pool, q);
                     }
                     BHTree_insertBody(tree->SW, b);
                 } else {
@@ -129,7 +118,7 @@ void BHTree_insertBody(BHTree* tree, Body* body){
                     q = quad_subdivide_SE(tree->quad);
                     if (body_inQuad(*b, q)==true) {
                         if (tree->SE==NULL) {
-                            tree->SE = BHTree_create(q);
+                            tree->SE = Pool_getNextTree(&pool, q);
                         }
                         BHTree_insertBody(tree->SE, b);
                     }

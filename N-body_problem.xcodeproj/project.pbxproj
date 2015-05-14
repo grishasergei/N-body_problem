@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1C44768F1B04D7550061E7BD /* Pool.c in Sources */ = {isa = PBXBuildFile; fileRef = 1C44768D1B04D7550061E7BD /* Pool.c */; };
 		1C5D1BCA1AF4E2FB001329B9 /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = 1C5D1BC91AF4E2FB001329B9 /* main.c */; };
 		1C5D1BD81AF4E571001329B9 /* NB_Universe.c in Sources */ = {isa = PBXBuildFile; fileRef = 1C5D1BD61AF4E571001329B9 /* NB_Universe.c */; };
 		1C5D1BDB1AF4E6F9001329B9 /* NB_Body.c in Sources */ = {isa = PBXBuildFile; fileRef = 1C5D1BD91AF4E6F9001329B9 /* NB_Body.c */; };
@@ -30,6 +31,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		1C44768D1B04D7550061E7BD /* Pool.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Pool.c; sourceTree = "<group>"; };
+		1C44768E1B04D7550061E7BD /* Pool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Pool.h; sourceTree = "<group>"; };
 		1C5D1BC61AF4E2FB001329B9 /* N-body_problem */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "N-body_problem"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1C5D1BC91AF4E2FB001329B9 /* main.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
 		1C5D1BD01AF4E356001329B9 /* NB.Globals.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NB.Globals.h; sourceTree = "<group>"; };
@@ -90,6 +93,8 @@
 				1CEFE5421AF5178D00501CD1 /* NB_Calculations.c */,
 				1CEFE5431AF5178D00501CD1 /* NB_Calculations.h */,
 				1C5D1BD01AF4E356001329B9 /* NB.Globals.h */,
+				1C44768D1B04D7550061E7BD /* Pool.c */,
+				1C44768E1B04D7550061E7BD /* Pool.h */,
 			);
 			path = "N-body_problem";
 			sourceTree = "<group>";
@@ -172,6 +177,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1CEFE54E1AF6772D00501CD1 /* BHTree.c in Sources */,
+				1C44768F1B04D7550061E7BD /* Pool.c in Sources */,
 				1CEFE5441AF5178D00501CD1 /* NB_Calculations.c in Sources */,
 				1CEFE5411AF501C600501CD1 /* graphics.c in Sources */,
 				1C5D1BDB1AF4E6F9001329B9 /* NB_Body.c in Sources */,

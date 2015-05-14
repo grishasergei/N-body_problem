@@ -26,7 +26,6 @@ struct BHTree{
 
 typedef struct BHTree BHTree;
 
-BHTree*  BHTree_create(Quad quad);
 void    BHTree_destroy(BHTree* tree);
 bool    BHTree_isExternal(BHTree* tree);
 void    BHTree_insertBody(BHTree* tree, Body* body);
