@@ -23,7 +23,7 @@ UniverseProperties uniprops;
 Body* bodies_list;
 double T;
 int count;
-int N_ITERATIONS = 200;
+int N_ITERATIONS = 1000;
 double time_to_create_bh_tree, time_to_calc_forces, time_to_update_positions;
 
 void display(void){
