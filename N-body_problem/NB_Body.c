@@ -27,6 +27,9 @@ void Body_addAtoB(Body a, Body *b){
 }
 
 void body_addForce(Body* a, Body *b, UniverseProperties uniprops){
+    if (Body_areEqual(a, b)==true) {
+        return;
+    }
     double dx = b->x - a->x;
     double dy = b->y - a->y;
     double dist = sqrt(dx*dx +dy*dy);

@@ -8,8 +8,8 @@
 
 #include <stdlib.h>
 #include <string.h>
-#include "BHTree.h"
 #include "NB.Globals.h"
+#include "BHTree.h"
 
 BHTree*  BHTree_create(Quad quad){
     BHTree* tree;
@@ -145,9 +145,7 @@ void BHTree_insertBody(BHTree* tree, Body* body){
 
 void    BHTree_updateForce(BHTree* tree, Body* body, UniverseProperties uniprops){
     if (BHTree_isExternal(tree)==true) {
-        if (Body_areEqual(body, tree->body)==false) {
-            body_addForce(body, tree->body, uniprops);
-        }
+        body_addForce(body, tree->body, uniprops);
     } else if (tree->quad.length / getDistance(*body, *tree->body) < THRESHOLD_THETA){
         body_addForce(body, tree->body, uniprops);
     } else {

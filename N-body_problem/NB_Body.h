@@ -15,7 +15,6 @@
 #include "NB_Universe.h"
 
 typedef struct{
-    int ID;
     double x;
     double y;
     double Fx;
@@ -23,12 +22,13 @@ typedef struct{
     double u;
     double v;
     double mass;
+    int ID;    
 }Body;
 
 inline double  getDistance(Body a, Body b);
 inline bool    body_inQuad(Body body, Quad quad);
 inline void    Body_addAtoB(Body a, Body* b);
-inline void    body_addForce(Body* a, Body *b, UniverseProperties uniprops);
+inline void    body_addForce(Body* a, Body *b, UniverseProperties uniprops) __attribute__((always_inline));
 inline bool    Body_areEqual(Body* a, Body* b);
 
 #endif /* defined(__N_body_problem__NB_Body__) */

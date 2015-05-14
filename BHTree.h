@@ -10,9 +10,10 @@
 #define __N_body_problem__BHTree__
 
 #include <stdio.h>
+#include "NB_Body.h"
 #include "stdbool.h"
 #include "Quad.h"
-#include "NB_Body.h"
+
 
 struct BHTree{
     Body* body;

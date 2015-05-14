@@ -5,18 +5,17 @@
 //  Created by Sergii Gryshkevych on 02/05/15.
 //  Copyright (c) 2015 Sergii Gryshkevych. All rights reserved.
 //
+#include "BHTree.h"
+#include "NB_Body.h"
+#include "Quad.h"
+#include "NB.Globals.h"
+#include "NB_Universe.h"
+#include "NB_Calculations.h"
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <sys/time.h>
 #include <libiomp/omp.h>
-#include "NB.Globals.h"
-#include "NB_Universe.h"
-#include "NB_Body.h"
-#include "NB_Calculations.h"
-#include "BHTree.h"
-#include "Quad.h"
-
 #include "graphics.h"
 
 UniverseProperties uniprops;
@@ -88,10 +87,7 @@ void display(void){
 }
 
 int main(int argc, const char * argv[]) {
-    int i, n_iterations;
-    double avgT;
     
-    n_iterations = 2000;
     T = 0;
     
     uniprops.N = 10000;
