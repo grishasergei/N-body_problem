@@ -14,7 +14,6 @@
 #include "NB_Universe.h"
 #include "NB.Globals.h"
 
-void calculate_velocity(Body* bodies, UniverseProperties uniprop);
 void update_positions(Body *bodies, UniverseProperties uniprop);
 void initialize_bodies(Body* bodies, UniverseProperties universe);
 

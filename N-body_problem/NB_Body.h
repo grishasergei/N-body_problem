@@ -25,11 +25,11 @@ typedef struct{
     double mass;
 }Body;
 
-double  getDistance(Body a, Body b);
-bool    body_inQuad(Body body, Quad quad);
-void    Body_addAtoB(Body a, Body* b);
-void    body_addForce(Body* a, Body *b, UniverseProperties uniprops);
-bool    Body_areEqual(Body* a, Body* b);
+inline double  getDistance(Body a, Body b);
+inline bool    body_inQuad(Body body, Quad quad);
+inline void    Body_addAtoB(Body a, Body* b);
+inline void    body_addForce(Body* a, Body *b, UniverseProperties uniprops);
+inline bool    Body_areEqual(Body* a, Body* b);
 
 #endif /* defined(__N_body_problem__NB_Body__) */
 

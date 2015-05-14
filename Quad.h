@@ -17,7 +17,7 @@ typedef struct{
     long double length;
 } Quad;
 
-bool quad_contains(Quad quad, double x, double y);
+inline bool quad_contains(Quad quad, double x, double y);
 Quad quad_subdivide_NW(Quad quad);
 Quad quad_subdivide_NE(Quad quad);
 Quad quad_subdivide_SW(Quad quad);

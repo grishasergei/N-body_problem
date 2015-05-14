@@ -87,35 +87,6 @@ void display(void){
 
 }
 
-double calcall(void){
-    int i;
-    Quad quad;
-    quad.length = 1;
-    quad.xmid = 0.5;
-    quad.ymid = 0.5;
-    
-    clock_t t1 = clock();
-    
-    BHTree* tree = BHTree_create(quad);
-    
-    for (i=0; i<uniprops.N; i++) {
-        //printf("ID: %d inserting \n",bodies_list[i].ID);
-        BHTree_insertBody(tree, &bodies_list[i]);
-    }
-    
-    for (i=0; i<uniprops.N; i++) {
-        bodies_list[i].Fx = 0;
-        bodies_list[i].Fy = 0;
-        BHTree_updateForce(tree, &bodies_list[i], uniprops);
-    }
-    
-    BHTree_destroy(tree);
-    
-    clock_t t2 = clock();
-    return (double)(t2-t1)/CLOCKS_PER_SEC;
-    
-}
-
 int main(int argc, const char * argv[]) {
     int i, n_iterations;
     double avgT;
@@ -142,15 +113,7 @@ int main(int argc, const char * argv[]) {
     
     graphicsInit(&argc, argv, display);
     glutMainLoop();
-    /*
-    avgT = 0;
-    for (i=0; i<n_iterations; i++) {
-        printf("%d\n",i);
-        avgT += calcall();
-    }
-    avgT = avgT / n_iterations;
-    printf("Average execution time per iteration: %f seconds\n",avgT);
-    */
+
     free(bodies_list);
     
     return 0;

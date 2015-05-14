@@ -10,7 +10,7 @@
 
 bool quad_contains(Quad quad, double x, double y){
     bool result = false;
-    if ((x<=quad.xmid + quad.length/2) && (x>=quad.xmid - quad.length/2) && (y<=quad.ymid + quad.length/2) &&(y>=quad.ymid - quad.length/2))  {
+    if ((x<=quad.xmid + quad.length/2) && (x>=quad.xmid - quad.length/2) && (y<=quad.ymid + quad.length/2) && (y>=quad.ymid - quad.length/2)){
         result = true;
     }
     return result;
