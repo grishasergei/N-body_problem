@@ -56,7 +56,7 @@ void BHTree_insertBody(BHTree* tree, Body* body){
         q = quad_subdivide_NW(tree->quad);
         if (body_inQuad(*body, q)==true) {
             if (tree->NW==NULL) {
-                tree->NW = Pool_getNextTree(&pool, q);
+                tree->NW = PoolTree_getNextTree(&poolTree, &poolBody, q);
             }
             BHTree_insertBody(tree->NW, body);
         } else {
@@ -64,7 +64,7 @@ void BHTree_insertBody(BHTree* tree, Body* body){
             q = quad_subdivide_NE(tree->quad);
             if (body_inQuad(*body, q)==true) {
                 if (tree->NE==NULL) {
-                    tree->NE = Pool_getNextTree(&pool, q);
+                    tree->NE = PoolTree_getNextTree(&poolTree, &poolBody, q);
                 }
                 BHTree_insertBody(tree->NE, body);
             } else {
@@ -72,7 +72,7 @@ void BHTree_insertBody(BHTree* tree, Body* body){
                 q = quad_subdivide_SW(tree->quad);
                 if (body_inQuad(*body, q)==true) {
                     if (tree->SW==NULL) {
-                        tree->SW = Pool_getNextTree(&pool, q);
+                        tree->SW = PoolTree_getNextTree(&poolTree, &poolBody, q);
                     }
                     BHTree_insertBody(tree->SW, body);
                 } else {
@@ -80,7 +80,7 @@ void BHTree_insertBody(BHTree* tree, Body* body){
                     q = quad_subdivide_SE(tree->quad);
                     if (body_inQuad(*body, q)==true) {
                         if (tree->SE==NULL) {
-                            tree->SE = Pool_getNextTree(&pool, q);
+                            tree->SE = PoolTree_getNextTree(&poolTree, &poolBody, q);
                         }
                         BHTree_insertBody(tree->SE, body);
                     }
@@ -94,7 +94,7 @@ void BHTree_insertBody(BHTree* tree, Body* body){
         q = quad_subdivide_NW(tree->quad);
         if (body_inQuad(*b, q)==true) {
             if (tree->NW==NULL) {
-                tree->NW = Pool_getNextTree(&pool, q);
+                tree->NW = PoolTree_getNextTree(&poolTree, &poolBody, q);
             }
             BHTree_insertBody(tree->NW, b);
         } else {
@@ -102,7 +102,7 @@ void BHTree_insertBody(BHTree* tree, Body* body){
             q = quad_subdivide_NE(tree->quad);
             if (body_inQuad(*b, q)==true) {
                 if (tree->NE==NULL) {
-                    tree->NE = Pool_getNextTree(&pool, q);
+                    tree->NE = PoolTree_getNextTree(&poolTree, &poolBody, q);
                 }
                 BHTree_insertBody(tree->NE, b);
             } else {
@@ -110,7 +110,7 @@ void BHTree_insertBody(BHTree* tree, Body* body){
                 q = quad_subdivide_SW(tree->quad);
                 if (body_inQuad(*b, q)==true) {
                     if (tree->SW==NULL) {
-                        tree->SW = Pool_getNextTree(&pool, q);
+                        tree->SW = PoolTree_getNextTree(&poolTree, &poolBody, q);
                     }
                     BHTree_insertBody(tree->SW, b);
                 } else {
@@ -118,7 +118,7 @@ void BHTree_insertBody(BHTree* tree, Body* body){
                     q = quad_subdivide_SE(tree->quad);
                     if (body_inQuad(*b, q)==true) {
                         if (tree->SE==NULL) {
-                            tree->SE = Pool_getNextTree(&pool, q);
+                            tree->SE = PoolTree_getNextTree(&poolTree, &poolBody, q);
                         }
                         BHTree_insertBody(tree->SE, b);
                     }

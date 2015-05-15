@@ -19,7 +19,7 @@
 #include "graphics.h"
 
 UniverseProperties uniprops;
-Body* bodies_list;
+
 double T;
 int count;
 int N_ITERATIONS = 1000;
@@ -44,12 +44,13 @@ void display(void){
      */
     gettimeofday(&t1,NULL);
 
-    Pool_init(&pool, 10000);
+    PoolTree_init(&poolTree, uniprops.N*2);
     
-    BHTree* tree = Pool_getNextTree(&pool, quad);
+    BHTree* tree = PoolTree_getNextTree(&poolTree,&poolBody, quad);
     
     
     for (i=0; i<uniprops.N; i++) {
+        //printf("Inserting: %d\n", i);
         BHTree_insertBody(tree, &bodies_list[i]);
     }
     gettimeofday(&t2,NULL);
@@ -69,10 +70,9 @@ void display(void){
     gettimeofday(&t2,NULL);
     time_to_calc_forces += t2.tv_sec - t1.tv_sec + (double)(t2.tv_usec - t1.tv_usec)/1000000;
     
-    //BHTree_destroy(tree);
-    
-    free(pool.bodies);
-    free(pool.trees);
+    //BHTree_destroy(tree);     //free(pool.bodies);
+    poolBody.count = uniprops.N-1;
+    free(poolTree.trees);
     
     /*
      Update positions
@@ -116,14 +116,17 @@ int main(int argc, const char * argv[]) {
     time_to_create_bh_tree = 0;
     time_to_update_positions = 0;
     
-    bodies_list = (Body*)calloc(uniprops.N,sizeof(Body));
+    PoolBody_init(&poolBody, uniprops.N*2);
+    
+    bodies_list = poolBody.bodies;//(Body*)calloc(uniprops.N,sizeof(Body));
+    poolBody.count = uniprops.N-1;
     
     initialize_bodies(bodies_list, uniprops);
     
     graphicsInit(&argc, argv, display);
     glutMainLoop();
 
-    free(bodies_list);
+    free(poolBody.bodies);
     
     return 0;
 }

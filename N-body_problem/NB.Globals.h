@@ -18,7 +18,10 @@ static const int    W_DIM = 1;
 static const double NB_EPSILON = 1E-2;
 static const double THRESHOLD_THETA = 1;
 
-Pool pool;
+Body* bodies_list;
+
+PoolTree poolTree;
+PoolBody poolBody;
 
 #endif
 

@@ -17,10 +17,21 @@ typedef struct{
     int count;
     int capacity;
     BHTree* trees;
-    Body* bodies;
-} Pool;
+} PoolTree;
 
-BHTree*  Pool_getNextTree(Pool* pool, Quad quad);
-void    Pool_init(Pool* pool, int capacity);
+typedef struct{
+    int count;
+    int capacity;
+    Body* bodies;
+} PoolBody;
+
+BHTree*  PoolTree_getNextTree(PoolTree* pool, PoolBody* poolBody, Quad quad);
+void    PoolTree_init(PoolTree* pool, int capacity);
+
+Body*   PoolBody_getNext(PoolBody* pool);
+void    PoolBody_init(PoolBody* pool, int capacity);
+void    PoolBody_setCapacity(PoolBody* pool, int capacity);
+
+
 
 #endif /* defined(__N_body_problem__Pool__) */
