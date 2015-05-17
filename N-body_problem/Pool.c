@@ -45,7 +45,7 @@ void    PoolBody_init(PoolBody* pool, int capacity){
     pool->count = -1;
     pool->bodies = (Body*)calloc(capacity, sizeof(Body));
 }
-
+/*
 void    PoolBody_setCapacity(PoolBody* pool, int capacity){
     pool->capacity = capacity;
     pool->bodies = (Body*)realloc(pool->bodies, sizeof(Body)*pool->capacity);
@@ -53,4 +53,4 @@ void    PoolBody_setCapacity(PoolBody* pool, int capacity){
         pool->count = pool->capacity-1;
     }
     
-}
+}*/

@@ -30,7 +30,8 @@ void    PoolTree_init(PoolTree* pool, int capacity);
 
 Body*   PoolBody_getNext(PoolBody* pool);
 void    PoolBody_init(PoolBody* pool, int capacity);
-void    PoolBody_setCapacity(PoolBody* pool, int capacity);
+
+//void    PoolBody_setCapacity(PoolBody* pool, int capacity);
 
 
 

@@ -14,7 +14,7 @@ void update_positions(Body *bodies, UniverseProperties uniprop){
     int i;
     double ax, ay;
     
-    //#pragma omp parallel for private(ax, ay)
+    #pragma omp parallel for private(ax, ay)
     for (i=0; i<uniprop.N; i++) {
         ax = bodies[i].Fx / MASS;
         ay = bodies[i].Fy / MASS;

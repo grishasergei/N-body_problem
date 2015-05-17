@@ -61,7 +61,7 @@ void display(void){
      Calculate forces
      */
     gettimeofday(&t1,NULL);
-    //#pragma omp for
+    #pragma omp parallel for
     for (i=0; i<uniprops.N; i++) {
         bodies_list[i].Fx = 0;
         bodies_list[i].Fy = 0;
@@ -82,8 +82,8 @@ void display(void){
     gettimeofday(&t2,NULL);
     time_to_update_positions += t2.tv_sec - t1.tv_sec + (double)(t2.tv_usec - t1.tv_usec)/1000000;
 
-    //if (count>N_ITERATIONS-1) {
-    /*
+    if (count>N_ITERATIONS-1) {
+    
         avg_time_to_calc_forces = time_to_calc_forces / count;
         avg_time_to_create_bh_tree = time_to_create_bh_tree / count;
         avg_time_to_update_positions = time_to_update_positions / count;
@@ -91,10 +91,7 @@ void display(void){
         printf("Create BH tree: %f\n", avg_time_to_create_bh_tree);
         printf("Calculate forces: %f\n", avg_time_to_calc_forces);
         printf("Update positions: %f\n", avg_time_to_update_positions);
-     */
-        //exit(0);
-    //}
-    if (count>N_ITERATIONS-1) {
+        printf("N: %f\n", uniprops.N);
         exit(0);
     }
 }
